@@ -1,0 +1,53 @@
+
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>chatterbox</title>
+   
+
+    <!-- dependencies -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src='https://cdn.rawgit.com/yahoo/xss-filters/master/dist/xss-filters.js'></script>
+
+    <script>
+      // YOU DO NOT NEED TO EDIT THIS CODE
+      if (!/(&|\?)username=/.test(window.location.search)) {
+        var newSearch = window.location.search;
+        if (newSearch !== '' & newSearch !== '?') {
+          newSearch += '&';
+        }
+        var name = (prompt('What is your name?') || 'anonymous');
+        newSearch += 'username=' + name;
+        window.location.search = newSearch;
+      }
+    </script>
+    <!-- your scripts -->
+ 
+    <script src="app.js"></script>
+  </head>
+  <body>
+    <div id="main">
+      <h1>chatterbox</h1>
+        <form id="message" action="" method="" >
+          <fieldset>
+            <div id="roomInputs">
+              <label for="room">
+                Room
+                <select id="roomSelect">
+                </select>
+              <div id="hiddenRoomField"><input id='newRoomInput' placeholder='New Room Name' name='room' type="text"/></div>
+            </div>
+              </label>
+            <label for="text">
+              <input id='text' name='text' type="text"/>
+            </label>
+            <input id="send" type="submit"/>
+          </fieldset>
+        </form>
+      <div class="messageFeed" id="chats"></div>
+      <button class="getMessages" onclick="app.getRecent()">messages</button>
+    </div>
+    <div></div>
+  </body>
+</html>
