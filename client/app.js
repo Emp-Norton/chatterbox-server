@@ -81,7 +81,7 @@ var app = {
       userName = userName.encodeHtml();
     } 
 
-    var roomName = message.roomname || 'Main';
+    var roomName = message.roomname || 'lobby';
     if (roomName) {
       roomName = roomName.encodeHtml();
     }
@@ -107,12 +107,11 @@ var app = {
     var room = $('#newRoomInput').val();
     app.clearMessages();
     $.ajax({
-      url: 'http://127.0.0.1:3000/classes/' + room, // this needs to change depending on how we determine user's class
+      url: 'http://127.0.0.1:3000/classes/' + room, // 
       type: 'GET',
       success: function (response) {
         console.log('request sent, returned: ', response);
         app.messages = JSON.parse(response).results || app.messages;
-        console.log(app.messages);
         if (app.messages.length) {
           app.messages.forEach(message => {
             app.renderRoom(message.room);
@@ -135,7 +134,7 @@ var app = {
   showRoom: function() {
     app.clearMessages();
     app.messages.forEach(function(message) {
-      if (message.room === $('#newRoomInput').val()) {
+      if (message.room === $('#newRoomInput').val() || message.room === 'messages') {
         app.renderMessage(message);
       }
     });

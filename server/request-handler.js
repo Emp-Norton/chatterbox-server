@@ -45,7 +45,13 @@ var requestHandler = function(request, response) {
       response.end(JSON.stringify(allMessages));
     }); 
   } else { // GET REQUESTS
-    allMessages.results = storage.classes[room] || [];
+    if (!room || room.length < 1) {
+      for (var lobby in storage.classes) {
+        storage.classes[lobby].forEach(message => allMessages.results.push(message));
+      }
+    } else {
+      allMessages.results = storage.classes[room] || [];
+    }  
     response.end(JSON.stringify(allMessages));  
   }
 };
